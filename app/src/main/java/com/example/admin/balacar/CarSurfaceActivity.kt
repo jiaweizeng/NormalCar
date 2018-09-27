@@ -6,7 +6,9 @@ import android.view.Window
 import android.view.WindowManager
 
 class CarSurfaceActivity : AppCompatActivity() {
-
+    private val carView by lazy {
+        findViewById<CarView>(R.id.carSurfaceView)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //要在设置布局之前设置
@@ -14,9 +16,12 @@ class CarSurfaceActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_car_surface)
-        val carView = findViewById<CarView>(R.id.carSurfaceView)
 
         carView.restarDraw()
         carView.start()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        carView.release()
     }
 }

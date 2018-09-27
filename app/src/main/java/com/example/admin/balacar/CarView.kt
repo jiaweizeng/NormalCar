@@ -109,4 +109,8 @@ class CarView @JvmOverloads constructor(
         }
 
     }
+
+    fun release() {
+        holder.removeCallback(this)//界面销毁的时候注销回调
+    }
 }
